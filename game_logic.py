@@ -281,6 +281,7 @@ class Game:
                     if r + 1 >= self.rows:
                         continue
                     if self.field[r + 1][c] != " " or self.field[r + 1][c + 1] != " ":
+                        continue
                     self.field[r + 1][c] = self.field[r][c]
                     self.field[r + 1][c + 1] = self.field[r][c + 1]
                     self.field[r][c] = " "
