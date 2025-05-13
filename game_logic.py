@@ -3,7 +3,7 @@
 #81845142
 from typing import Optional
 class Game:
-    '''Includes all of the states and rules of a Dr. Mario game.'''
+    '''Includes all of the states and rules of the Dr. Mario game.'''
     def __init__(self, rows: int, cols: int, field_contents: Optional[list[list[str]]] = None) -> None:
         self.rows = rows
         self.cols = cols
@@ -270,28 +270,24 @@ class Game:
         '''Implements the actual gravity once and will return True if there is any movement.'''
         moved = False
         new_connected = set()
-        # Handles horizontal connected capsules (left-right)
+        #  Horizontal connected capsules (L-R)
         for r in range(self.rows - 2, -1, -1):
             for c in range(self.cols - 1):
                 pair = ((r, c), (r, c + 1))
                 pair_rev = ((r, c + 1), (r, c))
                 if pair in self.connected_caps or pair_rev in self.connected_caps:
-                    # Skip invalid or already-broken capsules
                     if self.field[r][c] == " " or self.field[r][c + 1] == " ":
                         continue
-                    # Make sure both spaces below are free
                     if r + 1 >= self.rows:
                         continue
                     if self.field[r + 1][c] != " " or self.field[r + 1][c + 1] != " ":
-                        continue
-                    # Block fall if any obstacle is beneath either side
                     self.field[r + 1][c] = self.field[r][c]
                     self.field[r + 1][c + 1] = self.field[r][c + 1]
                     self.field[r][c] = " "
                     self.field[r][c + 1] = " "
                     new_connected.add(((r + 1, c),  (r + 1, c + 1)))
                     moved = True
-        # Handle vertical connected capsules (top-down)
+        # Vertical connected capsules (top-down)
         for r in range(self.rows - 2, -1, -1):
             for c in range(self.cols):
                 current = self.field[r][c]
