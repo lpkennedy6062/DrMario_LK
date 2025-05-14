@@ -4,7 +4,7 @@
 from game_logic import Game
 import shlex
 def main():
-    #some starting stuff
+    '''This function supports the main gameplay structure of requests, setup, and endgame.'''
     row = int(input())
     col = int(input())
     board = []
