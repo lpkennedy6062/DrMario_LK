@@ -36,12 +36,13 @@ def main():
                 game.fall(args[1], args[2])
             elif args[0] == "V" and len(args) == 4:
                 r, c, col = int(args[1]), int(args[2]), args[3].lower()
-                game.field[r][c] = col
-                matches_v = game._find_matches()
-                if matches_v:
-                    game.marked_matches = matches_v
-                    for (marked_row, marked_col) in matches_v:
-                        game.field[marked_row][marked_col] = f"*{game.field[marked_row][marked_col]}*"
+                if game.field[r][c] == " ":
+                    game.field[r][c] = col
+                    matches_v = game._find_matches()
+                    if matches_v:
+                        game.marked_matches = matches_v
+                        for (marked_row, marked_col) in matches_v:
+                            game.field[marked_row][marked_col] = f"*{game.field[marked_row][marked_col]}*"
             elif command == "<":
                 game.move_left()
             elif command == ">":
