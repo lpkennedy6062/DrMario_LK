@@ -202,14 +202,14 @@ class Game:
             st = self.faller["state"]
             r, c = self.faller["row"], self.faller["col"]
             left, right = self.faller["colors"]
-            ori = self.faller["orientation"]
+            orientation = self.faller["orientation"]
             if st == "falling":
                 self.faller["row"] += 1
                 if self._will_land():
                     self.faller["state"] = "landed"
                 return
             if st == "landed":
-                if ori == "horizontal":
+                if orientation == "horizontal":
                     self.field[r][c]   = left
                     self.field[r][c+1] = right
                     self.connected_caps.add(((r,c),(r,c+1)))
@@ -270,7 +270,6 @@ class Game:
         '''Implements the actual gravity once and will return True if there is any movement.'''
         moved = False
         new_connected = set()
-        #  Horizontal connected capsules (L-R)
         for r in range(self.rows - 2, -1, -1):
             for c in range(self.cols - 1):
                 pair = ((r, c), (r, c + 1))
@@ -288,7 +287,6 @@ class Game:
                     self.field[r][c + 1] = " "
                     new_connected.add(((r + 1, c),  (r + 1, c + 1)))
                     moved = True
-        # Vertical connected capsules (top-down)
         for r in range(self.rows - 2, -1, -1):
             for c in range(self.cols):
                 current = self.field[r][c]
