@@ -3,7 +3,7 @@
 #81845142
 from game_logic import Game
 import shlex
-def main():
+def main() -> None:
     '''This function supports the main gameplay structure of requests, setup, and endgame.'''
     row = int(input())
     col = int(input())
